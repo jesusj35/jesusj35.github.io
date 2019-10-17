@@ -1,0 +1,9 @@
+body{
+    background-color: #f2eeed;
+}
+
+#center {
+    margin: auto;
+    width: 70%;
+    padding: 30px;
+  }
