@@ -1,36 +1,53 @@
-from sklearn.feature_extraction.text import TfidfVectorizer 
-import json
-import pandas as pd
+import numpy as np
+from nltk.stem import PorterStemmer
+import operator
 
-docs=[]
 
 def loadJSON():
+    docs = []
+    doc_words = []
+    vocab = []
+    vocab_dict={}
+    cveids=[]
 	# open json file and convert to dict
     with open("C:/Users/Marina/Documents/Escuela/Info. Retrieval/jesusj35.github.io/Project1/nvd.json", 'r') as f:
         nvdinfo = json.load(f)
         
     for cve in nvdinfo['CVE_Items']:
-        value = cve['cve']['description']['description_data'][0]['value']
+        value = cve['cve']['description']['description_data'][0]['value'].lower()
         docs.append(value)
-		
+        cveids.append(cve['cve']['CVE_data_meta']['ID'])
+    query = "java"
+    docs.append(query)  
+    doc_words = [doc.split() for doc in docs]
+            
+   
+    vocab= sorted(set(sum(doc_words,[])))
+    vocab_dict = {k:i for i,k in enumerate(vocab)}
+    return docs, doc_words, vocab, vocab_dict, cveids, query
 
 
 def create_tfidf():
+    X_tf = np.zeros((len(docs), len(vocab)), dtype=int)
+    for i, doc in enumerate(doc_words):
+        for word in doc:
+            X_tf[i,vocab_dict[word]] +=1
     
-	# settings that you use for count vectorizer will go here
-    tfidf_vectorizer=TfidfVectorizer(use_idf=True)
-    # just send in all your docs here
-    tfidf_vectorizer_vectors=tfidf_vectorizer.fit_transform(docs)
-    
-    # get the first vector out (for the first document)
-    first_vector_tfidfvectorizer=tfidf_vectorizer_vectors[0]
- 
-    # place tf-idf values in a pandas data frame
-    df = pd.DataFrame(first_vector_tfidfvectorizer.T.todense(), index=tfidf_vectorizer.get_feature_names(), columns=["tfidf"])
-    df = df.sort_values(by=["tfidf"],ascending=False)
-    return df
+    idf = np.log10((X_tf.shape[0])/(X_tf.astype(bool).sum(axis=0)))
+    X_tfidf = X_tf*idf
+    #print(X_tfidf)
+    return X_tfidf
 	
-loadJSON()
-df =create_tfidf()
-print(df)
-df.to_csv("tfidf.txt")
+docs, doc_words, vocab, vocab_dict, cveids, query = loadJSON()
+X_tfidf = create_tfidf()
+output = open("tfidf.txt", "w")
+scores = {}
+for i in range(len(X_tfidf)-1):
+    scores[cveids[i]] = (np.dot(X_tfidf[i], X_tfidf[-1]))
+    
+sorted_scores = sorted(scores.items(), key=operator.itemgetter(1), reverse=True)
+#scores.sort(reverse=True)
+output.write("TFIDF\n")
+output.write("QUERY='" + query + "'\n")
+for score in sorted_scores:
+    output.write(str(score) + "\n")
