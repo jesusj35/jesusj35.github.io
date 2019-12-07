@@ -1,6 +1,6 @@
 import numpy as np
-from nltk.stem import PorterStemmer
 import operator
+import json
 
 
 def loadJSON():
