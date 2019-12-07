@@ -46,7 +46,7 @@ for i in range(len(lsi_dm[j])):
     
 sorted_scores = sorted(scores.items(), key=operator.itemgetter(1), reverse=True)
 #scores.sort(reverse=True)
-output.write("TFIDF\n")
+output.write("LSI\n")
 output.write("QUERY='" + query[0] + "'\n")
 for score in sorted_scores:
     output.write(str(score) + "\n")
