@@ -30,10 +30,10 @@ def intersection(p1, p2, grid):
 	p2list = sorted(grid[p2])
 	
 	# printing sorted lists for debugging
-	print(p1)
-	print(p1list)
-	print(p2)
-	print(p2list)
+	# print(p1)
+	# print(p1list)
+	# print(p2)
+	# print(p2list)
 	
 	# starting counters for traversing through the lists
 	x = 0
@@ -115,10 +115,11 @@ for cve in nvdinfo['CVE_Items']:
 sorted_words = sorted(list(word_entry.keys()))
 
 #query to check
-word1 = 'the'
+word1 = 'overflow'
 word2 = 'android'
 
 #calling intersection
+print("Result")
 print(intersection(word1, word2, word_entry))
 
 #create file to write inverted index to
