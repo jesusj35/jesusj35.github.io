@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Visuals</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="howto.html">Data</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="report.html">Report</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="viz.html">Visualizations</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container" id="center">
+        <h1>Scatterplots: Android and iOS</h1>
+        <div class="row">
+            <div class="col">
+                <img src="visuals/vsandroid.png" class="img-fluid" alt="">
+            </div>
+            <div class="col">
+                <img src="visuals/vsios.png" class="img-fluid" alt="">
+            </div>
+        </div>
+        <p>For the scatterplots the most relevant documents for LSI were the higher numbers while TFIDF it is the lower numbers.
+            In TFIDF the score of 1.0 means that there is no match.
+        </p>
+        <h1 id="top">Android: Top 10</h1>
+        <div class="row">
+            <div class="col">
+                <img src="visuals/tfidfandroid.png" class="img-fluid" alt="">
+            </div>
+            <div class="col">
+                <img src="visuals/lsiandroid.png" class="img-fluid" alt="">
+            </div>
+        </div>
+        <p>Shows the top 10 documenst for LSI and TFIDF with the Android query.</p>
+        <h1 id="top">iOS: Top 10</h1>
+        <div class="row">
+            <div class="col">
+                <img src="visuals/tfidfios.png" class="img-fluid" alt="">
+            </div>
+            <div class="col">
+                <img src="visuals/lsiios.png" class="img-fluid" alt="">
+            </div>
+        </div>
+        <p>Shows the top 10 documenst for LSI and TFIDF with the iOS query</p>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
